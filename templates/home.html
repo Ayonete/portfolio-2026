@@ -14,8 +14,10 @@
             with Python, HTML, CSS, JavaScript, and ReactJS, and also explored C# for 
             game development in Unity. 
         <div class="hero-buttons">
-            <a href="{% url 'portfolio:home' %}" class="btn btn-primary">Contact Me</a>
-            <a href="{% url 'portfolio:projects' %}" class="btn btn-secondary-outline">View Resume</a>
+            <div class="hero-buttons">
+                <button onclick="openResumeModal()" class="btn btn-primary">View Resume</button>
+                <a href="#" class="btn btn-secondary-outline">Contact Me</a>
+            </div>
         </div>
     </div>
     

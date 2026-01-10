@@ -27,6 +27,17 @@
     <footer>
         <p>&copy; 2026 Ayonete Icha</p>
     </footer>
+
+        <!-- Resume Modal -->
+    <div id="resumeModal" class="modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeResumeModal()">&times;</button>
+            <div class="modal-body">
+                {% include 'portfolio/resume_content.html' %}
+            </div>
+        </div>
+    </div>
     
     <script src="{% static 'js/main.js' %}"></script>
     <script src="https://unpkg.com/htmx.org@1.9.10"></script>
