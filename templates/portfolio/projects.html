@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Projects{% endblock %}
+
+{% block content %}
+<div class="projects-layout">
+    <!-- Left sidebar with project list -->
+    <div class="projects-sidebar">
+        <h1>Projects</h1>
+        <div class="projects-list">
+            {% for project in projects %}
+            <div class="project-item {% if selected_project and project.slug == selected_project.slug %}active{% endif %}"
+                 hx-get="{% url 'portfolio:project_detail' project.slug %}"
+                 hx-target="#project-detail"
+                 hx-swap="innerHTML"
+                 hx-push-url="true">
+                <div class="project-number">00{{ forloop.counter }}</div>
+                <h3>{{ project.title }}</h3>
+                <p>{{ project.short_description }}</p>
+            </div>
+            {% empty %}
+            <p>No projects yet. Add some in the admin panel!</p>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <!-- Right panel with project details -->
+    <div id="project-detail" class="project-detail">
+        {% if selected_project %}
+            {% include 'portfolio/partials/project_detail.html' %}
+        {% else %}
+            <div class="empty-state">
+                <p>Select a project to view details</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

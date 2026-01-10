@@ -1,0 +1,42 @@
+<div class="project-content">
+    <div class="project-meta">
+        <span class="project-category">{{ selected_project.technologies }}</span>
+        <span class="project-date">{{ selected_project.date_completed|date:"F Y" }}</span>
+    </div>
+    
+    <h2>{{ selected_project.title }}</h2>
+    
+    {% if selected_project.image %}
+    <div class="project-image">
+        <img src="{{ selected_project.image.url }}" alt="{{ selected_project.title }}">
+    </div>
+    {% endif %}
+    
+    <div class="project-info">
+        <div class="info-item">
+            <h4>Published</h4>
+            <p>{{ selected_project.date_completed|date:"F j, Y" }}</p>
+        </div>
+        <div class="info-item">
+            <h4>Technologies</h4>
+            <div class="tech-tags">
+                {% for tech in selected_project.get_tech_list %}
+                <span class="tech-tag">{{ tech }}</span>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    
+    <div class="project-description">
+        {{ selected_project.description|safe }}
+    </div>
+    
+    <div class="project-links">
+        {% if selected_project.project_url %}
+        <a href="{{ selected_project.project_url }}" class="btn" target="_blank">View Project</a>
+        {% endif %}
+        {% if selected_project.github_url %}
+        <a href="{{ selected_project.github_url }}" class="btn btn-secondary-outline" target="_blank">View Code</a>
+        {% endif %}
+    </div>
+</div>

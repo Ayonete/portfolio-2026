@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Blog{% endblock %}
+
+{% block content %}
+<h1>Blog</h1>
+
+{% if user.is_authenticated %}
+    <a href="{% url 'blog:post_create' %}" class="btn">+ New Post</a>
+{% endif %}
+
+{% for post in posts %}
+    <article>
+        <h2><a href="{% url 'blog:post_detail' post.slug %}">{{ post.title }}</a></h2>
+        <time>{{ post.created_at|date:"F d, Y" }}</time>
+        <p>{{ post.excerpt }}</p>
+        
+        {% if user.is_authenticated %}
+            <a href="{% url 'blog:post_edit' post.slug %}">Edit</a>
+            <a href="{% url 'blog:post_delete' post.slug %}">Delete</a>
+        {% endif %}
+    </article>
+{% empty %}
+    <p>No posts yet.</p>
+{% endfor %}
+{% endblock %}

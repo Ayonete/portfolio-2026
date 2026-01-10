@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home - My Portfolio{% endblock %}
+
+{% block content %}
+<div class="hero-section">
+    <div class="rod"></div>
+    <div class="circle"></div>
+    
+    <div class="hero-left">
+        <h1>Hi, I'm Ayonete</h1>
+        <p class="hero-description">I'm a developer and an artist, with a passion for both technology 
+            and creativity. I began coding during my undergraduate degree, starting 
+            with Python, HTML, CSS, JavaScript, and ReactJS, and also explored C# for 
+            game development in Unity. 
+        <div class="hero-buttons">
+            <a href="{% url 'portfolio:home' %}" class="btn btn-primary">Contact Me</a>
+            <a href="{% url 'portfolio:projects' %}" class="btn btn-secondary-outline">View Resume</a>
+        </div>
+    </div>
+    
+    <div class="hero-right">
+        <img src="{% static 'images/Headshots.jpeg' %}" alt="Ayonete Icha" class="profile-pic"/>
+    </div> 
+</div>
+{% endblock %}
