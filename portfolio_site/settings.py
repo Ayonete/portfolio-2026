@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure--jl-l8-r$j4e2*mhg%et76i8=g#pto-9ss**shr8e&os9j^y2@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://portfolio-2026-livid-one.vercel.app/']
 
 
 # Application definition
