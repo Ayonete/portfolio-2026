@@ -5,18 +5,42 @@ def home(request):
     return render(request, 'home.html')
 
 def projects(request):
-    projects = Project.objects.all()
-    selected_project = projects.first() if projects.exists() else None
+    category = request.GET.get('category')
+    
+    if category:
+        projects_list = Project.objects.filter(category=category)
+    else:
+        projects_list = Project.objects.all()
+    
+    selected_project = projects_list.first() if projects_list.exists() else None
+    
+    # Get all categories for the filter buttons
+    categories = Project.CATEGORY_CHOICES
+    
     return render(request, 'portfolio/projects.html', {
-        'projects': projects,
-        'selected_project': selected_project
+        'projects': projects_list,
+        'selected_project': selected_project,
+        'categories': categories,
+        'active_category': category,
     })
 
 def project_detail_partial(request, slug):
     project = get_object_or_404(Project, slug=slug)
+    category = request.GET.get('category') 
+    
     if request.htmx:
-        return render(request, 'portfolio/partials/project_detail.html', {'selected_project': project})
+        return render(request, 'portfolio/partials/project_detail.html', {
+            'selected_project': project
+        })
+    
+    if category:
+        projects_list = Project.objects.filter(category=category)
+    else:
+        projects_list = Project.objects.all()
+    
     return render(request, 'portfolio/projects.html', {
-        'projects': Project.objects.all(),
-        'selected_project': project
+        'projects': projects_list,
+        'selected_project': project,
+        'categories': Project.CATEGORY_CHOICES,
+        'active_category': category,
     })

@@ -15,18 +15,21 @@
 <body>
     <nav>
     
-        <a href="{% url 'home' %}" class="logo-text">a.</a>
+        <!-- <a href="{% url 'home' %}" class="logo-text">a.</a> -->
         <a href="{% url 'home' %}">Home</a>
         <a href="{% url 'portfolio:projects' %}">Projects</a>
     </nav>
     
     <main>
+        <div class="rod"></div>
+        <div class="rod2"></div>
+        <div class="circle"></div>
         {% block content %}{% endblock %}
     </main>
     
-    <footer>
+    <!-- <footer>
         <p>&copy; 2026 Ayonete Icha</p>
-    </footer>
+    </footer> -->
 
         <!-- Resume Modal -->
     <div id="resumeModal" class="modal">

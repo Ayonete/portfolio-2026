@@ -8,19 +8,35 @@
     <!-- Left sidebar with project list -->
     <div class="projects-sidebar">
         <h1>Projects</h1>
+        
+        <!-- Category Filter -->
+        <div class="category-filters">
+            <a href="{% url 'portfolio:projects' %}" 
+               class="filter-btn {% if not active_category %}active{% endif %}">
+                All
+            </a>
+            {% for value, label in categories %}
+            <a href="{% url 'portfolio:projects' %}?category={{ value }}" 
+               class="filter-btn {% if active_category == value %}active{% endif %}">
+                {{ label }}
+            </a>
+            {% endfor %}
+        </div>
+        
         <div class="projects-list">
             {% for project in projects %}
             <div class="project-item {% if selected_project and project.slug == selected_project.slug %}active{% endif %}"
-                 hx-get="{% url 'portfolio:project_detail' project.slug %}"
+                 hx-get="{% url 'portfolio:project_detail' project.slug %}{% if active_category %}?category={{ active_category }}{% endif %}"
                  hx-target="#project-detail"
                  hx-swap="innerHTML"
                  hx-push-url="true">
                 <div class="project-number">00{{ forloop.counter }}</div>
+                <!-- <div class="project-category-badge">{{ project.get_category_display_name }}</div> -->
                 <h3>{{ project.title }}</h3>
                 <p>{{ project.short_description }}</p>
             </div>
             {% empty %}
-            <p>No projects yet. Add some in the admin panel!</p>
+            <p>No projects in this category yet.</p>
             {% endfor %}
         </div>
     </div>
