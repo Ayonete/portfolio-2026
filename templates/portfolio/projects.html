@@ -7,9 +7,9 @@
 <div class="projects-layout">
     <!-- Left sidebar with project list -->
     <div class="projects-sidebar">
-        <h1>Projects</h1>
-        
-        <!-- Category Filter -->
+        <div class="project-header">
+            <h1>Projects</h1>
+            <!-- Category Filter -->
         <div class="category-filters">
             <a href="{% url 'portfolio:projects' %}" 
                class="filter-btn {% if not active_category %}active{% endif %}">
@@ -21,6 +21,7 @@
                 {{ label }}
             </a>
             {% endfor %}
+        </div>
         </div>
         
         <div class="projects-list">

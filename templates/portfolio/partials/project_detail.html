@@ -6,11 +6,11 @@
     
     <h2>{{ selected_project.title }}</h2>
     
-    {% if selected_project.image %}
+    <!-- {% if selected_project.image %}
     <div class="project-image">
         <img src="{{ selected_project.image.url }}" alt="{{ selected_project.title }}">
     </div>
-    {% endif %}
+    {% endif %} -->
     
     <div class="project-info">
         <div class="info-item">
@@ -33,7 +33,7 @@
     
     <div class="project-links">
         {% if selected_project.project_url %}
-        <a href="{{ selected_project.project_url }}" class="btn" target="_blank">View Project</a>
+        <a href="{{ selected_project.project_url }}" class="btn btn-primary" target="_blank">View Project</a>
         {% endif %}
         {% if selected_project.github_url %}
         <a href="{{ selected_project.github_url }}" class="btn btn-secondary-outline" target="_blank">View Code</a>

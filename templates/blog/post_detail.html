@@ -3,18 +3,20 @@
 {% block title %}{{ post.title }}{% endblock %}
 
 {% block content %}
-<article>
-    <h1>{{ post.title }}</h1>
-    <time>{{ post.created_at|date:"F d, Y" }}</time>
-    
-    {% if user.is_authenticated %}
-        <div class="post-actions">
-            <a href="{% url 'blog:post_edit' post.slug %}">Edit</a>
-            <a href="{% url 'blog:post_delete' post.slug %}">Delete</a>
-        </div>
-    {% endif %}
-    
-    <div class="post-content">{{ post.content|safe }}</div>
-</article>
-<a href="{% url 'blog:post_list' %}">← Back to blog</a>
+<div class="blog-detail">
+    <article>
+        <h1>{{ post.title }}</h1>
+        <time>{{ post.created_at|date:"F d, Y" }}</time>
+        
+        {% if user.is_authenticated %}
+            <div class="post-actions">
+                <a href="{% url 'blog:post_edit' post.slug %}">Edit</a>
+                <a href="{% url 'blog:post_delete' post.slug %}">Delete</a>
+            </div>
+        {% endif %}
+        
+        <div class="post-content">{{ post.content|safe }}</div>
+    </article>
+    <a href="{% url 'blog:post_list' %}" class="blog-back-link">← Back to blog</a>
+</div>
 {% endblock %}
