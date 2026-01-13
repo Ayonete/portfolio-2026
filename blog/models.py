@@ -8,7 +8,7 @@ class Post(models.Model):
     slug = models.SlugField(unique=True, blank=True)
     content = RichTextUploadingField()
     excerpt = models.TextField(blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField()
     updated_at = models.DateTimeField(auto_now=True)
     published = models.BooleanField(default=False)
 
