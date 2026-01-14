@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     'django_htmx',
-    'livereload',
 ]
 
 MIDDLEWARE = [
