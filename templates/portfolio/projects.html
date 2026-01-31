@@ -4,81 +4,265 @@
 {% block title %}Projects{% endblock %}
 
 {% block content %}
-<div class="projects-layout">
-    <!-- Left sidebar with project list -->
-    <div class="projects-sidebar">
-        <div class="project-header">
+<div class="container">
+    <div class="projects-container">
+        <div class="projects-header">
             <h1>Projects</h1>
 
             <!-- Category Filter -->
             <div class="category-filters">
-                <a href="{% url 'portfolio:projects' %}" 
-                   class="filter-btn {% if not active_category %}active{% endif %}">
+                <button class="filter-btn {% if not active_category %}active{% endif %}"
+                        data-category="all">
                     All
-                </a>
+                </button>
 
-                {% for value, label in categories %}
-                <a href="{% url 'portfolio:projects' %}?category={{ value }}" 
-                   class="filter-btn {% if active_category == value %}active{% endif %}">
-                    {{ label }}
-                </a>
+                {% for category in categories %}
+                <button class="filter-btn {% if active_category == category.slug %}active{% endif %}"
+                        data-category="{{ category.slug }}">
+                    {{ category.display_name }}
+                </button>
                 {% endfor %}
             </div>
         </div>
-        
-        <div class="projects-list">
-            {% for project in projects %}
-            <div class="project-item 
-                        {% if selected_project and project.slug == selected_project.slug %}active{% endif %}"
-                 data-slug="{{ project.slug }}"
-                 hx-get="{% url 'portfolio:project_detail' project.slug %}{% if active_category %}?category={{ active_category }}{% endif %}"
-                 hx-target="#project-detail"
-                 hx-swap="innerHTML"
-                 hx-push-url="true">
 
-                <div class="project-number">00{{ forloop.counter }}</div>
-                <h3>{{ project.title }}</h3>
-                <p>{{ project.short_description }}</p>
+        <!-- Grid Gallery -->
+        <div class="projects-grid" id="projectsGrid">
+            {% for project in projects %}
+            <div class="project-card"
+                 data-project-index="{{ forloop.counter0 }}"
+                 data-categories="{% for cat in project.categories.all %}{{ cat.slug }}{% if not forloop.last %},{% endif %}{% endfor %}">
+                {% if project.image %}
+                <img src="{{ project.image.url }}" alt="{{ project.title }}">
+                {% else %}
+                <div class="project-placeholder">
+                    <i class="fas fa-image"></i>
+                </div>
+                {% endif %}
+
+                <div class="project-card-content">
+                    <h3>{{ project.title }}</h3>
+                    <p>{{ project.short_description|truncatewords:15 }}</p>
+
+                    <div class="project-tech">
+                        {% for tech in project.get_tech_list|slice:":3" %}
+                        <span>{{ tech }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Hidden data for lightbox -->
+                <div class="project-data" style="display:none;"
+                     data-title="{{ project.title }}"
+                     data-description="{{ project.description|safe }}"
+                     data-date="{{ project.date_completed|date:'F Y' }}"
+                     data-image="{% if project.image %}{{ project.image.url }}{% endif %}"
+                     data-project-url="{{ project.project_url }}"
+                     data-github-url="{{ project.github_url }}"
+                     data-technologies="{{ project.technologies }}">
+                </div>
             </div>
             {% empty %}
-            <p>No projects in this category yet.</p>
+            <div class="empty-state">
+                <p>No projects available yet.</p>
+            </div>
             {% endfor %}
         </div>
     </div>
-    
-    <!-- Right panel with project details -->
-    <div id="project-detail" class="project-detail">
-        {% if selected_project %}
-            {% include 'portfolio/partials/project_detail.html' %}
-        {% else %}
-            <div class="empty-state">
-                <p>Select a project to view details</p>
+</div>
+
+<!-- Project Lightbox Modal -->
+<div id="projectLightbox" class="project-lightbox">
+    <div class="lightbox-overlay"></div>
+
+    <div class="lightbox-content">
+        <!-- Close button -->
+        <button class="lightbox-close" aria-label="Close lightbox">
+            <i class="fas fa-times"></i>
+        </button>
+
+        <!-- Navigation arrows -->
+        <button class="lightbox-nav lightbox-prev" aria-label="Previous project">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="lightbox-nav lightbox-next" aria-label="Next project">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+
+        <div class="lightbox-inner">
+            <!-- Project image/carousel -->
+            <div class="lightbox-media">
+                <img id="lightboxImage" src="" alt="">
             </div>
-        {% endif %}
+
+            <!-- Project details sidebar -->
+            <div class="lightbox-details">
+                <div class="lightbox-meta">
+                    <span id="lightboxDate"></span>
+                </div>
+
+                <h2 id="lightboxTitle"></h2>
+
+                <div class="lightbox-info">
+                    <div class="info-item">
+                        <h4>Technologies</h4>
+                        <div class="tech-tags" id="lightboxTech"></div>
+                    </div>
+                </div>
+
+                <div class="lightbox-description" id="lightboxDescription"></div>
+
+                <div class="lightbox-links" id="lightboxLinks"></div>
+            </div>
+        </div>
     </div>
 </div>
 
-<!-- HTMX Active-State Fix -->
 <script>
-document.body.addEventListener("htmx:afterSwap", (event) => {
-    // Only run when the detail panel updates
-    if (event.detail.target.id === "project-detail") {
+// Project Lightbox Functionality
+(function() {
+    const lightbox = document.getElementById('projectLightbox');
+    const projectCards = document.querySelectorAll('.project-card');
+    const closeBtn = document.querySelector('.lightbox-close');
+    const overlay = document.querySelector('.lightbox-overlay');
+    const prevBtn = document.querySelector('.lightbox-prev');
+    const nextBtn = document.querySelector('.lightbox-next');
 
-        // Remove existing active states
-        document.querySelectorAll(".project-item.active")
-            .forEach(el => el.classList.remove("active"));
+    let currentProjectIndex = 0;
+    let allProjects = [];
 
-        // Extract slug from URL
-        const slug = window.location.pathname.split("/").filter(Boolean).pop();
+    // Collect all project data
+    function initProjects() {
+        allProjects = Array.from(projectCards).map(card => {
+            const data = card.querySelector('.project-data');
+            return {
+                element: card,
+                title: data.dataset.title,
+                description: data.dataset.description,
+                date: data.dataset.date,
+                image: data.dataset.image,
+                projectUrl: data.dataset.projectUrl,
+                githubUrl: data.dataset.githubUrl,
+                technologies: data.dataset.technologies
+            };
+        });
+    }
 
-        // Find matching sidebar item
-        const activeItem = document.querySelector(`.project-item[data-slug="${slug}"]`);
+    // Open lightbox with project data
+    function openLightbox(index) {
+        currentProjectIndex = index;
+        const project = allProjects[index];
 
-        if (activeItem) {
-            activeItem.classList.add("active");
+        // Populate lightbox
+        document.getElementById('lightboxTitle').textContent = project.title;
+        document.getElementById('lightboxDate').textContent = project.date;
+        document.getElementById('lightboxDescription').innerHTML = project.description;
+
+        // Set image
+        const img = document.getElementById('lightboxImage');
+        if (project.image) {
+            img.src = project.image;
+            img.alt = project.title;
+            img.style.display = 'block';
+        } else {
+            img.style.display = 'none';
+        }
+
+        // Set technologies
+        const techContainer = document.getElementById('lightboxTech');
+        if (project.technologies) {
+            const techArray = project.technologies.split(',').map(t => t.trim());
+            techContainer.innerHTML = techArray.map(tech =>
+                `<span class="tech-tag">${tech}</span>`
+            ).join('');
+        }
+
+        // Set links
+        const linksContainer = document.getElementById('lightboxLinks');
+        let linksHTML = '';
+        if (project.projectUrl) {
+            linksHTML += `<a href="${project.projectUrl}" class="btn btn-primary" target="_blank">View Project</a>`;
+        }
+        if (project.githubUrl) {
+            linksHTML += `<a href="${project.githubUrl}" class="btn btn-secondary-outline" target="_blank">View Code</a>`;
+        }
+        linksContainer.innerHTML = linksHTML;
+
+        // Show lightbox
+        lightbox.classList.add('active');
+        document.body.classList.add('modal-open');
+
+        // Update navigation buttons
+        prevBtn.style.display = currentProjectIndex > 0 ? 'flex' : 'none';
+        nextBtn.style.display = currentProjectIndex < allProjects.length - 1 ? 'flex' : 'none';
+    }
+
+    // Close lightbox
+    function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.classList.remove('modal-open');
+    }
+
+    // Navigate to next project
+    function nextProject() {
+        if (currentProjectIndex < allProjects.length - 1) {
+            openLightbox(currentProjectIndex + 1);
         }
     }
-});
+
+    // Navigate to previous project
+    function prevProject() {
+        if (currentProjectIndex > 0) {
+            openLightbox(currentProjectIndex - 1);
+        }
+    }
+
+    // Event listeners
+    projectCards.forEach((card, index) => {
+        card.addEventListener('click', () => openLightbox(index));
+    });
+
+    closeBtn?.addEventListener('click', closeLightbox);
+    overlay?.addEventListener('click', closeLightbox);
+    prevBtn?.addEventListener('click', prevProject);
+    nextBtn?.addEventListener('click', nextProject);
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('active')) return;
+
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowRight') nextProject();
+        if (e.key === 'ArrowLeft') prevProject();
+    });
+
+    // Category filtering
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const category = this.dataset.category;
+
+            // Update active button
+            filterBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+
+            // Filter projects
+            projectCards.forEach(card => {
+                const projectCategories = card.dataset.categories.split(',');
+                if (category === 'all' || projectCategories.includes(category)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Re-init projects array after filtering
+            initProjects();
+        });
+    });
+
+    // Initialize on load
+    initProjects();
+})();
 </script>
 
 {% endblock %}

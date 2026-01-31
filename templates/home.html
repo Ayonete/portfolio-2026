@@ -3,20 +3,52 @@
 {% block title %}Home - My Portfolio{% endblock %}
 
 {% block content %}
-<div class="hero-section">
-       
+<div class="container">
+    <div class="hero-section">
+        <!-- Decorative colored blocks -->
+        <div class="decorative-blocks">
+            <div class="color-block purple block-1"></div>
+            <div class="color-block orange block-2"></div>
+            <div class="color-block yellow block-3"></div>
+            <div class="color-block purple block-4"></div>
+            <div class="color-block orange block-5"></div>
+        </div>
 
-    <div class="hero-left">
-        <h1>Hi, I'm Ayonete</h1>
-        <p class="hero-description">I am an Information Technology, Cloud, Media and Communications Graduate</p>
-        <div class="hero-buttons">
+        <div class="hero-left">
+            <h1>Hi, I'm Ayonete</h1>
+            <p class="hero-description">
+                I am a creative and technical generalist with skills in
+                <span class="highlight-word" data-graphic="design">design</span>,
+                <span class="highlight-word" data-graphic="development">development</span> and
+                <span class="highlight-word" data-graphic="cloud">cloud computing</span>
+            </p>
+            <div class="hero-buttons">
                 <button onclick="openResumeModal()" class="btn btn-primary">View Resume</button>
                 <a href="https://www.ayonete.com/" class="btn btn-secondary-outline">Art Site</a>
+            </div>
+        </div>
+
+        <div class="hero-right">
+            <img src="{% static 'images/Headshots.jpeg' %}" alt="Ayonete Icha" class="profile-pic"/>
+
+            <!-- Graphic containers -->
+            <div class="graphic-container design-graphic" data-graphic="design" data-index="1"></div>
+            <div class="graphic-container design-graphic" data-graphic="design" data-index="2"></div>
+            <div class="graphic-container design-graphic" data-graphic="design" data-index="3"></div>
+            <div class="graphic-container design-graphic" data-graphic="design" data-index="4"></div>
+
+            <!-- Development graphics -->
+            <div class="graphic-container development-graphic" data-graphic="development" data-index="1"></div>
+            <div class="graphic-container development-graphic" data-graphic="development" data-index="2"></div>
+            <div class="graphic-container development-graphic" data-graphic="development" data-index="3"></div>
+            <div class="graphic-container development-graphic" data-graphic="development" data-index="4"></div>
+
+            <!-- Cloud graphics -->
+            <div class="graphic-container cloud-graphic" data-graphic="cloud" data-index="1"></div>
+            <div class="graphic-container cloud-graphic" data-graphic="cloud" data-index="2"></div>
+            <div class="graphic-container cloud-graphic" data-graphic="cloud" data-index="3"></div>
+            <div class="graphic-container cloud-graphic" data-graphic="cloud" data-index="4"></div>
         </div>
     </div>
-    
-    <div class="hero-right">
-        <img src="{% static 'images/Headshots.jpeg' %}" alt="Ayonete Icha" class="profile-pic"/>
-    </div> 
 </div>
 {% endblock %}

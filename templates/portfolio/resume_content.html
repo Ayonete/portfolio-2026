@@ -1,179 +1,357 @@
 {% load static %}
 
-<div class="resume-container">
-    <div class="resume-header">
-        <h1>Ayonete Icha</h1>
-        <p class="subtitle">Information Technology | Cloud & DevOps Graduate</p>
-        <div class="contact-links">
-            <a href="https://www.linkedin.com/in/ayonete-icha/" target="_blank">LinkedIn</a>
-            <a href="{% url 'portfolio:projects' %}">Projects</a>
-            <a href="https://www.notion.so/Writing-Samples-14c6f07c8dbc80e5abeeedc383902d85">Writing Samples</a>
+<div class="resume-infographic">
+    <!-- Header -->
+    <header class="resume-header-infographic">
+        <h1 class="resume-name">Ayonete Icha</h1>
+        <p class="resume-title">Cloud & DevOps Graduate | IT Professional | Creative Technologist</p>
+        <div class="resume-contact-icons">
+            <a href="https://www.linkedin.com/in/ayonete-icha/" target="_blank" title="LinkedIn">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="{% url 'portfolio:projects' %}" title="Projects">
+                <i class="fas fa-folder-open"></i>
+            </a>
+            <a href="https://www.notion.so/Writing-Samples-14c6f07c8dbc80e5abeeedc383902d85" target="_blank" title="Writing Samples">
+                <i class="fas fa-pen-fancy"></i>
+            </a>
+            <a href="mailto:contact@ayonete.com" title="Email">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- Top Row: Profile/Education + Skills/Languages -->
+    <div class="resume-columns">
+        <div class="resume-left-col">
+            <!-- Profile -->
+            <section class="infographic-section">
+                <h2 class="section-title"><i class="fas fa-user"></i> Profile</h2>
+                <p class="profile-text">
+                    Cloud Developer and IT professional with expertise in <span class="highlight">web development</span>,
+                    <span class="highlight">administration</span>, and <span class="highlight">cloud computing</span>.
+                    Experienced in AWS, Azure DevOps workflows, and delivering solutions through cross-functional collaboration.
+                </p>
+            </section>
+
+            <!-- Education Timeline -->
+            <section class="infographic-section">
+                <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Education</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-date">2023 - 2024</span>
+                            <h3>MSc Cloud Computing</h3>
+                            <p class="timeline-place">National College of Ireland, Dublin</p>
+                            <p class="timeline-detail">Research: Adaptive Model Selection for Energy Efficient Generative AI</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-date">2018 - 2022</span>
+                            <h3>BSc Information Science & Media</h3>
+                            <p class="timeline-place">Pan-Atlantic University, Lagos</p>
+                            <p class="timeline-detail">First Class Honours (1:1)</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="resume-right-col">
+            <!-- Skills with Animated Bars -->
+            <section class="infographic-section">
+                <h2 class="section-title"><i class="fas fa-chart-bar"></i> Skills</h2>
+                <div class="skill-bar-group">
+                    <div class="skill-bar-item" data-skill="85">
+                        <div class="skill-bar-header">
+                            <span class="skill-name">Web Development</span>
+                            <span class="skill-years">3+ years</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-bar-fill purple" style="--target-width: 85%;"></div>
+                        </div>
+                        <div class="skill-tags">
+                            <span>Python</span><span>Django</span><span>React</span><span>Node.js</span><span>Git</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-bar-item" data-skill="65">
+                        <div class="skill-bar-header">
+                            <span class="skill-name">Cloud Computing</span>
+                            <span class="skill-years">2 years</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-bar-fill purple-gradient" style="--target-width: 65%;"></div>
+                        </div>
+                        <div class="skill-tags">
+                            <span>AWS</span><span>Azure</span><span>Docker</span><span>Terraform</span><span>CI/CD</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-bar-item" data-skill="40">
+                        <div class="skill-bar-header">
+                            <span class="skill-name">System Administration</span>
+                            <span class="skill-years">1 year</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-bar-fill orange" style="--target-width: 50%;"></div>
+                        </div>
+                        <div class="skill-tags">
+                            <span>Linux</span><span>Windows Server</span><span>Bash</span><span>PowerShell</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-bar-item" data-skill="25">
+                        <div class="skill-bar-header">
+                            <span class="skill-name">AI Tools</span>
+                            <span class="skill-years">&lt;1 year</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-bar-fill yellow" style="--target-width: 60%;"></div>
+                        </div>
+                        <div class="skill-tags">
+                            <span>Claude Code</span><span>Cursor</span><span>Lovable</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Languages -->
+            <section class="infographic-section">
+                <h2 class="section-title"><i class="fas fa-globe"></i> Languages</h2>
+                <div class="language-bars">
+                    <div class="language-item">
+                        <span class="lang-name">English</span>
+                        <div class="lang-level">
+                            <span class="lang-dot filled"></span>
+                            <span class="lang-dot filled"></span>
+                            <span class="lang-dot filled"></span>
+                            <span class="lang-dot filled"></span>
+                            <span class="lang-dot filled"></span>
+                        </div>
+                        <span class="lang-label">Native</span>
+                    </div>
+                    <div class="language-item">
+                        <span class="lang-name">French</span>
+                        <div class="lang-level">
+                            <span class="lang-dot filled"></span>
+                            <span class="lang-dot"></span>
+                            <span class="lang-dot"></span>
+                            <span class="lang-dot"></span>
+                            <span class="lang-dot"></span>
+                        </div>
+                        <span class="lang-label">Beginner</span>
+                    </div>
+                </div>
+            </section>
         </div>
     </div>
 
-    <section class="resume-section">
-        <h2>Professional Profile</h2>
-        <ul>
-            <li>Cloud Developer and IT professional with expertise in web platform administration, technical documentation and cloud development</li>
-            <li>Skilled in system administration, cloud platform management, and translating business requirements into technical solutions</li>
-            <li>Experienced in AWS, Azure DevOps workflows, security compliance, and delivering web enhancements through cross-functional collaboration</li>
-        </ul>
+    <!-- Experience Section - Horizontal Carousel -->
+    <section class="infographic-section full-width">
+        <h2 class="section-title"><i class="fas fa-briefcase"></i> Experience</h2>
+        <div class="experience-carousel" id="expCarousel">
+            <button class="exp-nav-btn prev" onclick="moveExpCarousel(-1)"><i class="fas fa-chevron-left"></i></button>
+            <div class="experience-track-wrapper">
+                <div class="experience-track" id="expTrack">
+                    <div class="experience-card">
+                        <div class="exp-header">
+                            <div class="exp-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+                            <div class="exp-title-block">
+                                <h3>Cloud & DevOps Teaching Assistant</h3>
+                                <p class="exp-company">Ironhack, Dublin</p>
+                                <span class="exp-date">Aug - Oct 2025</span>
+                            </div>
+                        </div>
+                        <ul class="exp-highlights">
+                            <li>Delivered DevOps & Cloud curriculum (Linux, CI/CD, Docker, K8s, Terraform)</li>
+                            <li>Guided hands-on projects deploying three-tier applications</li>
+                        </ul>
+                    </div>
+
+                    <div class="experience-card">
+                        <div class="exp-header">
+                            <div class="exp-icon"><i class="fas fa-cloud"></i></div>
+                            <div class="exp-title-block">
+                                <h3>Cloud & DevOps Projects</h3>
+                                <p class="exp-company">National College of Ireland</p>
+                                <span class="exp-date">Sep 2023 - Sep 2024</span>
+                            </div>
+                        </div>
+                        <ul class="exp-highlights">
+                            <li>Built cloud apps with AWS Lambda, API Gateway, DynamoDB, S3</li>
+                            <li>Implemented CI/CD pipelines blocking 100% of insecure builds</li>
+                            <li>Configured IAM policies compliant with ISO 27001</li>
+                        </ul>
+                    </div>
+
+                    <div class="experience-card">
+                        <div class="exp-header">
+                            <div class="exp-icon"><i class="fas fa-bullhorn"></i></div>
+                            <div class="exp-title-block">
+                                <h3>Junior Project Manager & Copywriter</h3>
+                                <p class="exp-company">VOP Media</p>
+                                <span class="exp-date">Apr - Sep 2023</span>
+                            </div>
+                        </div>
+                        <ul class="exp-highlights">
+                            <li>Managed digital product launches, improving brand engagement by 15-40%</li>
+                            <li>Coordinated video, editorial, and marketing deliverables</li>
+                            <li>Audited website UX and documented user stories</li>
+                        </ul>
+                    </div>
+
+                    <div class="experience-card">
+                        <div class="exp-header">
+                            <div class="exp-icon"><i class="fas fa-code"></i></div>
+                            <div class="exp-title-block">
+                                <h3>Junior Frontend Developer</h3>
+                                <p class="exp-company">UGUM (SaaS Startup), Lagos</p>
+                                <span class="exp-date">Aug 2021 - May 2022</span>
+                            </div>
+                        </div>
+                        <ul class="exp-highlights">
+                            <li>Built dynamic React components, reducing load times by 15%</li>
+                            <li>Reduced production bugs by 30% through rigorous testing</li>
+                        </ul>
+                    </div>
+
+                    <div class="experience-card">
+                        <div class="exp-header">
+                            <div class="exp-icon"><i class="fas fa-palette"></i></div>
+                            <div class="exp-title-block">
+                                <h3>Freelance Multimedia Creator</h3>
+                                <p class="exp-company">Self-Employed</p>
+                                <span class="exp-date">2020 - Present</span>
+                            </div>
+                        </div>
+                        <ul class="exp-highlights">
+                            <li>Delivered 30+ projects across education, tech and retail</li>
+                            <li>Designed gamified tutorials and educational content</li>
+                            <li>Utilised AI in crafting immersive web-based digital experiences</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <button class="exp-nav-btn next" onclick="moveExpCarousel(1)"><i class="fas fa-chevron-right"></i></button>
+        </div>
     </section>
 
-    <section class="resume-section">
-        <h2>Education</h2>
-        
-        <div class="resume-item">
-            <h3>MSc Cloud Computing</h3>
-            <p class="company">National College of Ireland, Dublin, IR | September 2023 - September 2024</p>
-            <p><strong>Modules:</strong> Cloud Architecture, DevOpsSec, MLOps, Cloud Platform Programming</p>
-            <p><strong>Research Project:</strong> Adaptive Model Selection for Energy Efficient Generative AI Applications</p>
-        </div>
-        
-        <div class="resume-item">
-            <h3>BSc Information Science and Media Studies</h3>
-            <p class="company">Pan-Atlantic University, Lagos, NG | October 2018 - July 2022</p>
-            <p><strong>Modules:</strong> Data Science, Statistics, Programming, Enterprise Resource Planning, Game Design</p>
-            <p><strong>Grade:</strong> First Class (1:1)</p>
-        </div>
-    </section>
-
-    <section class="resume-section">
-        <h2>Experience</h2>
-        
-        <div class="resume-item">
-            <h3>Cloud & DevOps Teaching Assistant</h3>
-            <p class="company">Ironhack (Contract), Dublin, IR | August 2025 - October 2025</p>
-            <ul>
-                <li>Supported delivery of DevOps & Cloud curriculum, building students' expertise in Linux administration, Git/GitHub, CI/CD, Docker, Kubernetes, Terraform, and Azure</li>
-                <li>Provided technical support and troubleshooting for Linux, scripting, cloud provisioning, and configuration issues</li>
-                <li>Improved learning outcomes by tracking progress, identifying gaps, and resolving lab environment errors</li>
-                <li>Guided hands-on projects deploying three-tier applications manually and via Infrastructure as Code</li>
-            </ul>
-        </div>
-        
-        <div class="resume-item">
-            <h3>Cloud and DevOps</h3>
-            <p class="company">National College of Ireland, Dublin, IR | September 2023 - September 2024</p>
-            <p class="subtitle-text">Academic project work with production-grade tools and pipelines</p>
-            <ul>
-                <li>Designed and implemented a cloud-based application using AWS Lambda, API Gateway, DynamoDB, S3, SNS, Python, and Django to help users monitor and reduce carbon impact</li>
-                <li>Secured deployments and enhanced threat detection by blocking 100% of insecure builds automatically with Pylint, SonarQube, CodePipeline using CI/CD principles</li>
-                <li>Strengthened cloud security by configuring role-based access with AWS IAM/Service Control Policies complying with general ITGC and ISO 27001 best practices</li>
-                <li>Implemented real-time monitoring and alerts (SNS, CloudWatch), improving availability by 40%</li>
-                <li>Created extensive technical documentation e.g API reference materials and deployment guides</li>
-                <li>Performed troubleshooting and resolution of serverless deployment issues (AWS Lambda, API Gateway)</li>
-            </ul>
-        </div>
-        
-        <div class="resume-item">
-            <h3>Junior Frontend Developer</h3>
-            <p class="company">UGUM (SaaS Startup), Lagos, NG | August 2021 - May 2022</p>
-            <ul>
-                <li>Designed and implemented dynamic front-end components in ReactTS, enhancing user experience and reducing page load times by 15%</li>
-                <li>Conducted rigorous API and application endpoint testing, improving system reliability and reducing production bugs by 30%</li>
-                <li>Created detailed application documentation, streamlining onboarding for new developers and reducing project ramp-up time by 20%</li>
-            </ul>
-        </div>
-    </section>
-
-    <section class="resume-section">
-        <h2>Relevant Skills</h2>
-        
-        <div class="skills-category">
-            <h3>Cloud Computing (2 years)</h3>
-            <div class="skills-list">
-                <span class="skill">AWS (Certified)</span>
-                <span class="skill">Azure</span>
-                <span class="skill">GCP (Basic)</span>
-                <span class="skill">CI/CD</span>
-                <span class="skill">DevSecOps</span>
-                <span class="skill">Docker</span>
-                <span class="skill">SonarQube</span>
-                <span class="skill">Terraform</span>
-                <span class="skill">IaC</span>
-                <span class="skill">IAM</span>
-                <span class="skill">ISO 27001</span>
+    <!-- Certifications Carousel - Full Width -->
+    <section class="infographic-section full-width">
+        <h2 class="section-title"><i class="fas fa-certificate"></i> Certifications</h2>
+        <div class="cert-carousel" id="certCarousel">
+            <div class="cert-track">
+                <div class="cert-card">
+                    <div class="cert-icon"><i class="fab fa-aws"></i></div>
+                    <h4>AWS Cloud Practitioner</h4>
+                    <span class="cert-date">January 2025</span>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon"><i class="fab fa-ubuntu"></i></div>
+                    <h4>Ubuntu Linux Professional</h4>
+                    <span class="cert-date">October 2025</span>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon"><i class="fab fa-aws"></i></div>
+                    <h4>AWS Cloud Women Mentorship</h4>
+                    <span class="cert-date">January 2025</span>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon"><i class="fab fa-linux"></i></div>
+                    <h4>Open Source Tech Documentation</h4>
+                    <span class="cert-date">October 2024</span>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon"><i class="fas fa-tasks"></i></div>
+                    <h4>Project Management Fundamentals</h4>
+                    <span class="cert-date">October 2024</span>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon"><i class="fab fa-google"></i></div>
+                    <h4>Fundamentals of Digital Marketing</h4>
+                    <span class="cert-date">February 2023</span>
+                </div>
+            </div>
+            <div class="cert-nav">
+                <button class="cert-nav-btn prev" onclick="moveCertCarousel(-1)"><i class="fas fa-chevron-left"></i></button>
+                <div class="cert-dots" id="certDots"></div>
+                <button class="cert-nav-btn next" onclick="moveCertCarousel(1)"><i class="fas fa-chevron-right"></i></button>
             </div>
         </div>
-        
-        <div class="skills-category">
-            <h3>System Administration (1 year)</h3>
-            <div class="skills-list">
-                <span class="skill">Windows Server</span>
-                <span class="skill">Linux</span>
-                <span class="skill">Powershell</span>
-                <span class="skill">Bash Scripting</span>
-                <span class="skill">Azure CLI</span>
-                <span class="skill">REST API</span>
-                <span class="skill">Active Directory</span>
+    </section>
+
+    <!-- Projects & Achievements - List Format -->
+    <section class="infographic-section full-width">
+        <h2 class="section-title"><i class="fas fa-trophy"></i> Projects & Achievements</h2>
+        <div class="achievements-list">
+            <div class="achievement-item">
+                <div class="achievement-icon"><i class="fas fa-gamepad"></i></div>
+                <div class="achievement-content">
+                    <h4>Last Night in Lagos <span class="achievement-year">2025</span></h4>
+                    <p>Independently wrote, designed and developed an interactive narrative game integrating Twine and Unity, managing story design, branching logic, and cross-functional integration of mini-games.</p>
+                    <a href="https://ayonetei.itch.io/last-night-in-lagos" target="_blank" class="achievement-link"><i class="fas fa-external-link-alt"></i> View Project</a>
+                </div>
+            </div>
+
+            <div class="achievement-item">
+                <div class="achievement-icon"><i class="fas fa-award"></i></div>
+                <div class="achievement-content">
+                    <h4>Echoes Game Jam Co-Winner <span class="achievement-year">2025</span></h4>
+                    <p>Led UI design and supported narrative design for Queen Idia, winning top prize. The game is now set to become an installation at the National Museum Lagos.</p>
+                </div>
+            </div>
+
+            <div class="achievement-item">
+                <div class="achievement-icon"><i class="fas fa-film"></i></div>
+                <div class="achievement-content">
+                    <h4>Gorm Summer Residency <span class="achievement-year">2025</span></h4>
+                    <p>Selected as part of a cohort of filmmakers workshopping screenplays and treatments.</p>
+                    <a href="https://www.gorm.ie/" target="_blank" class="achievement-link"><i class="fas fa-external-link-alt"></i> Learn More</a>
+                </div>
+            </div>
+
+            <div class="achievement-item">
+                <div class="achievement-icon"><i class="fas fa-leaf"></i></div>
+                <div class="achievement-content">
+                    <h4>Cloud for Good <span class="achievement-year">Since 2023</span></h4>
+                    <p>Developed cloud-based projects aligned with UN Sustainable Development Goals, including a carbon emissions tracker, automated greenhouse monitor, and energy-efficient generative AI application.</p>
+                </div>
+            </div>
+
+            <div class="achievement-item">
+                <div class="achievement-icon"><i class="fas fa-paint-brush"></i></div>
+                <div class="achievement-content">
+                    <h4>Freelance Illustrator <span class="achievement-year">Since 2020</span></h4>
+                    <p>Worked independently for 6 years as an artist and illustrator, managing complex client projects and timelines.</p>
+                </div>
+            </div>
+
+            <div class="achievement-item">
+                <div class="achievement-icon"><i class="fas fa-pen-nib"></i></div>
+                <div class="achievement-content">
+                    <h4>Cultural Writing</h4>
+                    <p>Founded and maintain a cultural blog dedicated to African art, media, and diaspora studies, centering underrepresented narratives and contemporary creative expression.</p>
+                </div>
+            </div>
+
+            <div class="achievement-item">
+                <div class="achievement-icon"><i class="fas fa-users"></i></div>
+                <div class="achievement-content">
+                    <h4>Leadership</h4>
+                    <p>President of Pan-Atlantic University Art Club (2020-2022). Student Activities Officer organizing cross-departmental events and initiatives.</p>
+                </div>
             </div>
         </div>
-        
-        <div class="skills-category">
-            <h3>Web Development (3+ years)</h3>
-            <div class="skills-list">
-                <span class="skill">Python</span>
-                <span class="skill">Django</span>
-                <span class="skill">SQL</span>
-                <span class="skill">YAML</span>
-                <span class="skill">ReactJS/TS</span>
-                <span class="skill">NodeJS</span>
-                <span class="skill">Git</span>
-                <span class="skill">GitHub</span>
-                <span class="skill">Unity/C#</span>
-                <span class="skill">UI/UX</span>
-                <span class="skill">Figma</span>
-            </div>
-        </div>
-        
-        <div class="skills-category">
-            <h3>AI Familiarity</h3>
-            <div class="skills-list">
-                <span class="skill">Claude Code</span>
-                <span class="skill">Cursor</span>
-                <span class="skill">Lovable</span>
-            </div>
-        </div>
     </section>
 
-    <section class="resume-section">
-        <h2>Certifications</h2>
-        <ul>
-            <li><strong>AWS Cloud Practitioner</strong> - January 2025</li>
-            <li><strong>Ubuntu Linux Professional</strong> - October 2025</li>
-            <li><strong>AWS Certified Cloud Practitioner</strong> - January 2025</li>
-            <li><strong>AWS Cloud Women Mentorship Program</strong> - January 2025</li>
-            <li><strong>Open Source Technical Documentation Essentials (LFC111) </strong> - October 2024</li>
-            <li><strong>Project Management Fundamentals</strong> - October 2024</li>
-            <li><strong>Fundamentals of Digital Marketing</strong> - Feburary 2023</li>
-        </ul>
-    </section>
-
-    <section class="resume-section">
-        <h2>Projects and Key Achievements</h2>
-        
-        <div class="resume-item">
-            <h3>Sustainable Cloud Technology</h3>
-            <p>Developed several cloud-based projects aligned with the UN Sustainable Development Goals, including a carbon emissions tracker, an automated greenhouse monitor, and an energy-efficient generative AI application.</p>
-        </div>
-        
-        <div class="resume-item">
-            <h3>Leadership</h3>
-            <ul>
-                <li>Served as the president of the Pan-Atlantic University Art Club (2020-2022)</li>
-                <li>Served as the Student Activities Officer at Pan-Atlantic University, organizing cross-departmental events and initiatives</li>
-            </ul>
-        </div>
-    </section>
-
-    <section class="resume-section">
-        <h2>Languages</h2>
-        <p><strong>English:</strong> Native | <strong>French:</strong> Beginner</p>
-    </section>
-
-    <div class="resume-actions">
-        <a href="{% static 'resume/Ayonete_Icha_Resume.pdf' %}" class="btn btn-primary" download>Download PDF Resume</a>
-        <!-- <a href="#" class="btn btn-secondary-outline">Contact Me</a> -->
-    </div>
+    <!-- Footer -->
+    <footer class="resume-footer-infographic">
+        <a href="{% static 'resume/Ayonete_Icha_Resume.pdf' %}" class="btn btn-primary download-btn" download>
+            <i class="fas fa-download"></i> Download PDF Resume
+        </a>
+    </footer>
 </div>
